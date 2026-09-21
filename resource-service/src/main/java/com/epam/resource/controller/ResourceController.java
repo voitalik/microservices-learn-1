@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 import com.epam.resource.dto.DeletedResourcesResponse;
 import com.epam.resource.dto.ResourceResponse;
+import com.epam.resource.service.OrchestratorService;
 import com.epam.resource.service.ResourceService;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RequiredArgsConstructor
 public class ResourceController {
+    private final OrchestratorService orchestratorService;
     private final ResourceService resourceService;
 
     @PostMapping
@@ -34,7 +36,7 @@ public class ResourceController {
     public ResourceResponse upload(
             @RequestHeader(value = CONTENT_TYPE, required = false) String contentType,
             @RequestBody(required = false) byte[] data) {
-        return resourceService.create(contentType, data);
+        return orchestratorService.create(contentType, data);
     }
 
     @GetMapping("/{id}")
@@ -47,6 +49,6 @@ public class ResourceController {
     @DeleteMapping
     @ResponseStatus(OK)
     public DeletedResourcesResponse delete(@RequestParam String id) {
-        return resourceService.delete(id);
+        return orchestratorService.deleteAll(id);
     }
 }

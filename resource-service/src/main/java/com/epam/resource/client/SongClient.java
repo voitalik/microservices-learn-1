@@ -11,5 +11,5 @@ public interface SongClient {
     void create(@RequestBody SongMetadata metadata);
 
     @DeleteMapping("/songs")
-    void delete(@RequestParam("id") String ids);
+    void deleteAll(@RequestParam("id") String ids);
 }
