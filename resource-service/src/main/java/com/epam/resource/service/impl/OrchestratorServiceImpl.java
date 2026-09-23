@@ -38,7 +38,9 @@ public class OrchestratorServiceImpl implements OrchestratorService {
     public DeletedResourcesResponse deleteAll(String ids) {
         var requestedIds = idValidator.parseCsv(ids);
         DeletedResourcesResponse response = resourceService.deleteAll(requestedIds);
-        songClient.deleteAll(ids);
+        if (!response.ids().isEmpty()) {
+            songClient.deleteAll(ids);
+        }
 
         return response;
     }
