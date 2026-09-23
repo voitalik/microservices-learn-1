@@ -7,10 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @Table(name = "resources")
+@NoArgsConstructor
 public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +20,6 @@ public class Resource {
 
     @Column(nullable = false, columnDefinition = "bytea")
     private byte[] data;
-
-    protected Resource() {
-    }
 
     public Resource(byte[] data) {
         this.data = data;
