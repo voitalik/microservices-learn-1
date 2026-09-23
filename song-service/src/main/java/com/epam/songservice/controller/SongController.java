@@ -7,7 +7,6 @@ import com.epam.songservice.dto.SongDto;
 import com.epam.songservice.dto.SongResponse;
 import com.epam.songservice.service.SongService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
