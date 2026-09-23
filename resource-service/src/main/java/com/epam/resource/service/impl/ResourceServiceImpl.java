@@ -7,6 +7,7 @@ import com.epam.resource.dto.ResourceResponse;
 import com.epam.resource.entity.Resource;
 import com.epam.resource.exception.ResourceNotFoundException;
 import com.epam.resource.repository.ResourceRepository;
+import com.epam.resource.service.ResourceIdValidator;
 import com.epam.resource.service.ResourceService;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class ResourceServiceImpl implements ResourceService {
+
+    private final ResourceIdValidator idValidator;
     private final ResourceRepository repository;
 
     @Override
@@ -28,14 +31,15 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     @Transactional(readOnly = true)
-    public byte[] get(Integer id) {
+    public byte[] get(String value) {
+        var id = idValidator.parse(value);
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(id))
                 .getData();
     }
 
-    @Transactional
     @Override
+    @Transactional
     public DeletedResourcesResponse deleteAll(List<Integer> requestedIds) {
         var resources = repository.findAllById(requestedIds);
         repository.deleteAll(resources);

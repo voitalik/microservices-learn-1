@@ -7,11 +7,9 @@ import com.epam.resource.dto.DeletedResourcesResponse;
 import com.epam.resource.dto.ResourceResponse;
 import com.epam.resource.service.OrchestratorService;
 import com.epam.resource.service.ResourceService;
-import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/resources")
-@Validated
 @RequiredArgsConstructor
 public class ResourceController {
     private final OrchestratorService orchestratorService;
@@ -40,7 +37,7 @@ public class ResourceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> get(@PathVariable @Positive Integer id) {
+    public ResponseEntity<byte[]> get(@PathVariable String id) {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("audio/mpeg"))
                 .body(resourceService.get(id));
