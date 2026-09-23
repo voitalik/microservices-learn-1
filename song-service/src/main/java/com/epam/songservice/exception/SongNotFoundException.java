@@ -1,0 +1,7 @@
+package com.epam.songservice.exception;
+
+public class SongNotFoundException extends RuntimeException {
+    public SongNotFoundException(Integer id) {
+        super("Song metadata for ID=" + id + " not found");
+    }
+}
