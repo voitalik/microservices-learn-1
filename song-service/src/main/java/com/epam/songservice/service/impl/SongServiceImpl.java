@@ -37,7 +37,8 @@ public class SongServiceImpl implements SongService {
 
     @Override
     @Transactional(readOnly = true)
-    public SongDto get(Integer id) {
+    public SongDto get(String value) {
+        var id = idValidator.parse(value);
         var song = repository.findById(id)
                 .orElseThrow(() -> new SongNotFoundException(id));
 
@@ -46,7 +47,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public DeletedSongsResponse deleteAll(String ids) {
         var requestedIds = idValidator.parseCsv(ids);
         var songs = repository.findAllById(requestedIds);

@@ -35,7 +35,7 @@ public class SongController {
 
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public SongDto get(@PathVariable @Positive Integer id) {
+    public SongDto get(@PathVariable String id) {
         return songService.get(id);
     }
 

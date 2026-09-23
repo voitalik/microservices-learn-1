@@ -8,7 +8,7 @@ public interface SongService {
 
     SongResponse create(SongDto song);
 
-    SongDto get(Integer id);
+    SongDto get(String id);
 
     DeletedSongsResponse deleteAll(String ids);
 }

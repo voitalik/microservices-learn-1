@@ -38,7 +38,6 @@ public class SongIdValidator {
     }
 
     private InvalidSongIdException invalidId(String value) {
-        return new InvalidSongIdException(
-                "Invalid song ID: " + value + ". ID must be a positive integer");
+        return new InvalidSongIdException("Invalid song ID: " + value + ". ID must be a positive integer");
     }
 }
