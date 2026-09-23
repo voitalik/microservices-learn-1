@@ -27,7 +27,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<ErrorResponse> missingParameter(MissingServletRequestParameterException exception) {
+    public ResponseEntity<ErrorResponse> missingParameter(
+            MissingServletRequestParameterException exception) {
         return error(HttpStatus.BAD_REQUEST, "Required parameter '"
                 + exception.getParameterName() + "' is missing");
     }
@@ -38,8 +39,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResponseEntity<ErrorResponse> invalidContentType(HttpMediaTypeNotSupportedException exception) {
-        return error(HttpStatus.BAD_REQUEST, "Invalid file format: " + exception.getContentType()
+    public ResponseEntity<ErrorResponse> invalidContentType(
+            HttpMediaTypeNotSupportedException exception) {
+        return error(HttpStatus.BAD_REQUEST, "Invalid file format: "
+                + exception.getContentType()
                 + ". Only MP3 files are allowed");
     }
 
@@ -61,6 +64,7 @@ public class GlobalExceptionHandler {
     }
 
     private ResponseEntity<ErrorResponse> error(HttpStatus status, String message) {
-        return ResponseEntity.status(status).body(new ErrorResponse(message, Integer.toString(status.value())));
+        return ResponseEntity.status(status)
+                .body(new ErrorResponse(message, Integer.toString(status.value())));
     }
 }

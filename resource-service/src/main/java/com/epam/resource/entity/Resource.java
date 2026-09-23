@@ -10,8 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
 @Table(name = "resources")
+@Getter
 @NoArgsConstructor
 public class Resource {
     @Id

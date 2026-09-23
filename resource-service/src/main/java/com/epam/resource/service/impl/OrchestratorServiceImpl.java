@@ -59,6 +59,6 @@ public class OrchestratorServiceImpl implements OrchestratorService {
         }
 
         throw new InvalidResourceException("Invalid file format: " + contentType
-                + ". Only MP3 " + "files are allowed");
+                + ". Only MP3 files are allowed");
     }
 }

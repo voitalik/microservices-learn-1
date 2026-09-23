@@ -26,6 +26,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Transactional
     public ResourceResponse create(byte[] data) {
         Resource resource = repository.save(new Resource(data));
+
         return new ResourceResponse(resource.getId());
     }
 
@@ -33,6 +34,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Transactional(readOnly = true)
     public byte[] get(String value) {
         var id = idValidator.parse(value);
+
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(id))
                 .getData();
