@@ -9,6 +9,7 @@ import com.epam.resource.service.Mp3MetadataExtractor;
 import com.epam.resource.service.OrchestratorService;
 import com.epam.resource.service.ResourceIdValidator;
 import com.epam.resource.service.ResourceService;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.InvalidMediaTypeException;
 import org.springframework.http.MediaType;
@@ -39,7 +40,10 @@ public class OrchestratorServiceImpl implements OrchestratorService {
         var requestedIds = idValidator.parseCsv(ids);
         DeletedResourcesResponse response = resourceService.deleteAll(requestedIds);
         if (!response.ids().isEmpty()) {
-            songClient.deleteAll(ids);
+            String deletedIds = response.ids().stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(","));
+            songClient.deleteAll(deletedIds);
         }
 
         return response;
