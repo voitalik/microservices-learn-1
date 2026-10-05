@@ -1,4 +1,5 @@
 HELP.md
+eureka-server/target/
 resource-service/target/
 song-service/target/
 test-data-docs/
