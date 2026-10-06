@@ -38,7 +38,7 @@ services:
     deploy:
       replicas: 2
     ports:
-      - "${SONG_SERVICE_PORT_RANGE}:8072"
+      - "${SONG_SERVICE_PORT_RANGE}:8082"
     environment:
       SPRING_DATASOURCE_URL: ${SONG_DB_URL}
       SPRING_DATASOURCE_USERNAME: ${SONG_POSTGRES_USER}
